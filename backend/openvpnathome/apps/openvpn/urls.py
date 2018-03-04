@@ -9,6 +9,6 @@ api_urlpatterns = [
 ]
 
 views_urlpatterns = [
-    re_path('download/server/(?P<server_id>\d+)/(?P<filename>\w+)', DownloadServerConfig.as_view(), name='download-server-config'),
-    re_path('download/client/(?P<client_id>\d+)/(?P<filename>\w+)', DownloadClientConfig.as_view(), name='download-client-config')
+    re_path('download/server/(?P<server_id>\d+)/(?P<filename>\w+\.conf$)', DownloadServerConfig.as_view(), name='download-server-config'),
+    re_path('download/client/(?P<client_id>\d+)/(?P<filename>\w+\.ovpn$)', DownloadClientConfig.as_view(), name='download-client-config')
 ]
