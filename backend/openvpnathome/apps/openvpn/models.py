@@ -90,7 +90,7 @@ class Client(models.Model):
 
     @property
     def filename(self):
-        return slugify(self.name) + '.conf'
+        return slugify(self.name) + '.ovpn'
 
     @property
     def mimetype(self):
