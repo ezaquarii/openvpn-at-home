@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  app:
+    image: vpnathome
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - data:/srv/vpnathome/data
+
+volumes:
+  data:
