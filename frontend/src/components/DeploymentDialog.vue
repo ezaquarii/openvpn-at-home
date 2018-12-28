@@ -62,17 +62,25 @@ export default class DeploymentDialog extends Vue {
     }
 
     onStart () {
-        this.output.push('Deployment started', "Ignore first '[ERROR]:' line - this is harmless Ansible bug. :o)");
+        this.pushAutoScroll('Deployment started', "Ignore first '[ERROR]:' line - this is harmless Ansible bug. :o)");
     }
 
     onFinish () {
-        this.output.push('Deployment finished.');
+        this.pushAutoScroll('Deployment finished.');
         this.isRunning = false;
         this.finished = true;
     }
 
     onOutput (output) {
-        this.output.push(...output);
+        this.pushAutoScroll(...output);
+    }
+
+    pushAutoScroll (output) {
+        this.output.push(output);
+        var con = document.getElementsByClassName('content scrolling')[0];
+        if (con.scrollTop >= con.scrollHeight - con.clientHeight) {
+            this.$nextTick(function () { con.scrollTop = con.scrollHeight - con.clientHeight; });
+        }
     }
 
 }
