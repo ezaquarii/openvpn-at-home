@@ -76,10 +76,12 @@ export default class DeploymentDialog extends Vue {
     }
 
     pushAutoScroll (...output) {
-        this.output.push(...output);
         var con = document.getElementsByClassName('content scrolling')[0];
         if (con.scrollTop >= con.scrollHeight - con.clientHeight) {
+            this.output.push(...output);
             this.$nextTick(function () { con.scrollTop = con.scrollHeight - con.clientHeight; });
+        } else {
+            this.output.push(...output);
         }
     }
 
