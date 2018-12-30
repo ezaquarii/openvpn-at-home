@@ -2,7 +2,7 @@
     <div>
         <sui-modal v-model="open" v-bind:closable="false">
             <sui-modal-header>Deploy OpenVPN server</sui-modal-header>
-            <sui-modal-content scrolling>
+            <sui-modal-content scrolling ref="scrollBox">
                 <sui-container>
                     <div class="output">
                         <div v-for="(line, index) in output" :key="index">{{ line }}</div>
@@ -76,12 +76,13 @@ export default class DeploymentDialog extends Vue {
     }
 
     pushAutoScroll (...output) {
-        var con = document.getElementsByClassName('content scrolling')[0];
-        if (con.scrollTop >= con.scrollHeight - con.clientHeight) {
-            this.output.push(...output);
+        const con = this.$refs.scrollBox.$el;
+        const scrollFuzz = 5; // allowable distance from bottom in pixels to enable autoscroll
+        const shouldScroll = con.scrollTop >= con.scrollHeight - con.clientHeight - scrollFuzz;
+
+        this.output.push(...output);
+        if (shouldScroll) {
             this.$nextTick(function () { con.scrollTop = con.scrollHeight - con.clientHeight; });
-        } else {
-            this.output.push(...output);
         }
     }
 
