@@ -41,7 +41,7 @@ export class DeploymentRemoteProcess {
         const json = JSON.parse(message.data);
         if (json.status === 'running' && json.output && this.onOutput) {
             this.onOutput(json.output);
-        } else if (json.status === 'start' && this.onStart) {
+        } else if (json.status === 'started' && this.onStart) {
             this.onStart();
         } else if (json.status === 'finished' && this.onFinish) {
             this.onFinish();
