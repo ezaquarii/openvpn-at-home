@@ -2,7 +2,7 @@
     <div>
         <sui-modal v-model="open" v-bind:closable="false">
             <sui-modal-header>Deploy OpenVPN server</sui-modal-header>
-            <sui-modal-content scrolling ref="scrollBox">
+            <sui-modal-content scrolling ref="outputContainer">
                 <sui-container>
                     <div class="output">
                         <div v-for="(line, index) in output" :key="index">{{ line }}</div>
@@ -62,27 +62,27 @@ export default class DeploymentDialog extends Vue {
     }
 
     onStart () {
-        this.pushAutoScroll('Deployment started', "Ignore first '[ERROR]:' line - this is harmless Ansible bug. :o)");
+        this.pushAutoScroll([ 'Deployment started', "Ignore first '[ERROR]:' line - this is harmless Ansible bug. :o)" ]);
     }
 
     onFinish () {
-        this.pushAutoScroll('Deployment finished.');
+        this.pushAutoScroll([ 'Deployment finished.' ]);
         this.isRunning = false;
         this.finished = true;
     }
 
     onOutput (output) {
-        this.pushAutoScroll(...output);
+        this.pushAutoScroll(output);
     }
 
-    pushAutoScroll (...output) {
-        const con = this.$refs.scrollBox.$el;
-        const scrollFuzz = 5; // allowable distance from bottom in pixels to enable autoscroll
-        const shouldScroll = con.scrollTop >= con.scrollHeight - con.clientHeight - scrollFuzz;
+    pushAutoScroll (output) {
+        const outputContainer = this.$refs.outputContainer.$el;
+        const autoScrollSnapMargin = 5;
+        const shouldScroll = outputContainer.scrollTop >= outputContainer.scrollHeight - outputContainer.clientHeight - autoScrollSnapMargin;
 
         this.output.push(...output);
         if (shouldScroll) {
-            this.$nextTick(function () { con.scrollTop = con.scrollHeight - con.clientHeight; });
+            this.$nextTick(function () { outputContainer.scrollTop = outputContainer.scrollHeight - outputContainer.clientHeight; });
         }
     }
 
