@@ -112,7 +112,7 @@ You can try playing with DynDNS to work around it.
 
 **Why not language X**?
 
-I believe Python is optimal solution considering platform maturity, libraries quality and
+I believe Python is the optimal solution considering platform maturity, libraries quality and
 skills proliferation. There is not much choice for the frontend.
 
 Project structure
