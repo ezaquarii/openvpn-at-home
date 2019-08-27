@@ -1,4 +1,5 @@
 import os
+import getpass
 from os.path import join, abspath
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -31,7 +32,7 @@ class CheckIsAppReadyMiddleware:
                 'init_sh': get_init_sh_path(),
                 'working_dir': os.getcwd(),
                 'virtual_env': os.environ.get('VIRTUAL_ENV'),
-                'user': self.user
+                'user': os.environ['SUDO_USER'] if 'SUDO_USER' in os.environ else getpass.getuser()
             }
             setattr(request, 'app_not_ready', context)
         return self.get_response(request)
