@@ -1,6 +1,5 @@
 import os
 from os.path import join, abspath
-import username
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import OperationalError
@@ -32,7 +31,7 @@ class CheckIsAppReadyMiddleware:
                 'init_sh': get_init_sh_path(),
                 'working_dir': os.getcwd(),
                 'virtual_env': os.environ.get('VIRTUAL_ENV'),
-                'user': username.user
+                'user': self.user
             }
             setattr(request, 'app_not_ready', context)
         return self.get_response(request)
