@@ -15,6 +15,9 @@ def get_init_sh_path():
     d = os.environ.get('VIRTUAL_ENV', '')
     return abspath(join(d, 'bin/init.sh')) if d else '${VIRTUAL_ENV}/bin/init.sh'
 
+def get_process_user():
+    return os.environ['SUDO_USER'] if 'SUDO_USER' in os.environ else getpass.getuser()
+
 
 def get_process_user():
     return os.environ['SUDO_USER'] if 'SUDO_USER' in os.environ else getpass.getuser()
