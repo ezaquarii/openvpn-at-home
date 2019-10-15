@@ -11,6 +11,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from vpnathome import get_bin_path
+from vpnathome.apps.management.models import Settings
 
 
 User = get_user_model()
@@ -194,7 +195,9 @@ class Client(models.Model):
 
     @property
     def filename(self):
-        return "{client}--at--{server}.conf".format(client=slugify(self.name), server=slugify(self.server.name))
+        extension = Settings.instance().config_file_extension
+        return "{client}--at--{server}.{extension}".format(client=slugify(self.name),
+            server=slugify(self.server.name), extension=extension)
 
     @property
     def mimetype(self):

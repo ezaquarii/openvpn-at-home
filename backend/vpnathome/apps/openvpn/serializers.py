@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 from rest_framework import serializers
 
+from vpnathome.apps.management.models import Settings
 from vpnathome.apps.x509.models import Ca, Cert
 
 from . import models
@@ -49,7 +50,9 @@ class AdminServerSerializer(ServerSerializer):
         fields = ServerSerializer.Meta.fields + ['download_url']
 
     def get_download_url(self, instance):
-        kwargs={'server_id': instance.id, 'filename': slugify(instance.name) + '.conf'}
+        extension = Settings.instance().config_file_extension
+        kwargs={'server_id': instance.id, 'filename': slugify(instance.name) +
+                '.%s' % extension}
         return reverse('openvpn:download-server-config', kwargs=kwargs)
 
 
