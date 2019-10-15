@@ -5,6 +5,10 @@
                 <EmailSettings/>
             </sui-tab-pane>
 
+            <sui-tab-pane icon="code file" title="Config File Extension">
+                <ConfigFileExtensionSettings/>
+            </sui-tab-pane>
+
             <sui-tab-pane icon="user" title="Registration">
                 <RegistrationSettings/>
             </sui-tab-pane>
@@ -23,6 +27,7 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import EmailSettings from '@/components/settings/EmailSettings';
+import ConfigFileExtensionSettings from '@/components/settings/ConfigFileExtensionSettings';
 import RegistrationSettings from '@/components/settings/RegistrationSettings';
 import DnsFilteringSettings from '@/components/settings/DnsFilteringSettings';
 import SshKeysSettings from '@/components/settings/SshKeysSettings';
@@ -31,6 +36,7 @@ import SshKeysSettings from '@/components/settings/SshKeysSettings';
     name: 'Settings',
     components: {
         EmailSettings,
+        ConfigFileExtensionSettings,
         RegistrationSettings,
         DnsFilteringSettings,
         SshKeysSettings

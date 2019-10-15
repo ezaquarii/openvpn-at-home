@@ -31,7 +31,8 @@ const INITIAL_STATE = {
     },
     settings: {
         email_enabled: window.django.email_enabled,
-        registration_enabled: window.django.registration_enabled
+        registration_enabled: window.django.registration_enabled,
+        config_file_extension: window.django.config_file_extension
     }
 };
 

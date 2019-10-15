@@ -14,7 +14,9 @@ class SettingsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Settings
-        fields = ('email_enabled',
+        fields = ('FILE_EXTENSION_CHOICES',
+                  'email_enabled',
+                  'config_file_extension',
                   'registration_enabled',
                   'email_from',
                   'email_smtp_server',
