@@ -32,7 +32,8 @@ const INITIAL_STATE = {
     settings: {
         email_enabled: window.django.email_enabled,
         registration_enabled: window.django.registration_enabled,
-        config_file_extension: window.django.config_file_extension
+        config_file_extension: window.django.config_file_extension,
+        FILE_EXTENSION_CHOICES: []
     }
 };
 
@@ -175,10 +176,14 @@ const actions = {
         );
     },
 
-    setSettings ({ commit }, settings) {
+    setSettings ({ commit, dispatch }, settings) {
         api.setSettings(
             settings,
-            (setting) => commit('setSettings', settings),
+            (setting) => {
+                commit('setSettings', settings);
+                dispatch('getServers');
+                dispatch('getClients');
+            },
             (_) => {}
         );
     },

@@ -1,19 +1,18 @@
 <template>
     <form class="ui form" @submit.prevent="handleSubmit">
         <div class="content">
-            <!-- TODO Remove hardcoding of available extensions -->
-            <div class="field">
+            <div class="field" :key="extension[0]" v-for="extension in settings.FILE_EXTENSION_CHOICES">
                 <div class="ui radio checkbox">
-                    <input id="ovpn" v-model="settings.config_file_extension" type="radio" value="ovpn">
-                    <label for="ovpn">OVPN</label>
+                    <input :id="extension[0]" v-model="settings.config_file_extension" type="radio" :value="extension[0]">
+                    <label :for="extension[0]">{{ extension[1] }}</label>
                 </div>
             </div>
-            <div class="field">
+            <!--div class="field">
                 <div class="ui radio checkbox">
                     <input id="conf" v-model="settings.config_file_extension" type="radio" value="conf">
                     <label for="conf">CONF</label>
                 </div>
-            </div>
+            </div -->
             <div class="field">
                 <button type="submit" class="ui button settings-button" role="button" @submit="{}">Save</button>
             </div>
@@ -35,7 +34,8 @@ import _ from 'lodash';
 export default class ConfigFileExtensionSettings extends Vue {
 
         settings = {
-            config_file_extension: 'conf'
+            config_file_extension: 'conf',
+            FILE_EXTENSION_CHOICES: []
         };
 
         handleSubmit () {
@@ -44,6 +44,7 @@ export default class ConfigFileExtensionSettings extends Vue {
 
         mounted () {
             this.settings.config_file_extension = _.cloneDeep(this.$store.state.settings.config_file_extension);
+            this.settings.FILE_EXTENSION_CHOICES = _.cloneDeep(this.$store.state.settings.FILE_EXTENSION_CHOICES);
         }
 
 }
