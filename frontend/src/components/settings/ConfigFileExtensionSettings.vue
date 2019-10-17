@@ -1,10 +1,10 @@
 <template>
     <form class="ui form" @submit.prevent="handleSubmit">
         <div class="content">
-            <div class="field" :key="extension[0]" v-for="extension in settings.FILE_EXTENSION_CHOICES">
+            <div class="field" :key="extension.value" v-for="extension in settings.config_file_extension_choices">
                 <div class="ui radio checkbox">
-                    <input :id="extension[0]" v-model="settings.config_file_extension" type="radio" :value="extension[0]">
-                    <label :for="extension[0]">{{ extension[1] }}</label>
+                    <input :id="extension.value" v-model="settings.config_file_extension" type="radio" :value="extension.value">
+                    <label :for="extension.value">{{ extension.name }}</label>
                 </div>
             </div>
             <div class="field">
@@ -29,7 +29,7 @@ export default class ConfigFileExtensionSettings extends Vue {
 
         settings = {
             config_file_extension: 'conf',
-            FILE_EXTENSION_CHOICES: []
+            config_file_extension_choices: []
         };
 
         handleSubmit () {
@@ -38,7 +38,7 @@ export default class ConfigFileExtensionSettings extends Vue {
 
         mounted () {
             this.settings.config_file_extension = _.cloneDeep(this.$store.state.settings.config_file_extension);
-            this.settings.FILE_EXTENSION_CHOICES = _.cloneDeep(this.$store.state.settings.FILE_EXTENSION_CHOICES);
+            this.settings.config_file_extension_choices = _.cloneDeep(this.$store.state.settings.config_file_extension_choices);
         }
 
 }

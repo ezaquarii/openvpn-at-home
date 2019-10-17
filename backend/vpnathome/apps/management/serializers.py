@@ -11,10 +11,11 @@ class SettingsSerializer(serializers.ModelSerializer):
     email_smtp_port = serializers.SerializerMethodField()
     email_smtp_login = serializers.SerializerMethodField()
     email_smtp_password = serializers.SerializerMethodField()
+    config_file_extension_choices = serializers.SerializerMethodField()
 
     class Meta:
         model = Settings
-        fields = ('FILE_EXTENSION_CHOICES',
+        fields = ('config_file_extension_choices',
                   'email_enabled',
                   'config_file_extension',
                   'registration_enabled',
@@ -38,6 +39,16 @@ class SettingsSerializer(serializers.ModelSerializer):
 
     def get_email_smtp_password(self, instance):
         return 'hidden'
+
+    def get_config_file_extension_choices(self, instance):
+        """
+        Convert model choices to human readable format
+        """
+        serialized_choices = []
+        for choice in Settings.FILE_EXTENSION_CHOICES:
+            serialized_choices.append({'value': choice[0], 'name': choice[1]})
+
+        return serialized_choices
 
 
 class BlockListUrlUpdateSerializer(serializers.ModelSerializer):
