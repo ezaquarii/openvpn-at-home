@@ -7,12 +7,6 @@
                     <label :for="extension[0]">{{ extension[1] }}</label>
                 </div>
             </div>
-            <!--div class="field">
-                <div class="ui radio checkbox">
-                    <input id="conf" v-model="settings.config_file_extension" type="radio" value="conf">
-                    <label for="conf">CONF</label>
-                </div>
-            </div -->
             <div class="field">
                 <button type="submit" class="ui button settings-button" role="button" @submit="{}">Save</button>
             </div>
