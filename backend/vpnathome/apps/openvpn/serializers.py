@@ -50,7 +50,7 @@ class AdminServerSerializer(ServerSerializer):
         fields = ServerSerializer.Meta.fields + ['download_url']
 
     def get_download_url(self, instance):
-        extension = Settings.instance().config_file_extension
+        extension = Settings.instance().server_config_file_extension
         kwargs={'server_id': instance.id, 'filename': slugify(instance.name) +
                 '.%s' % extension}
         return reverse('openvpn:download-server-config', kwargs=kwargs)

@@ -32,8 +32,10 @@ const INITIAL_STATE = {
     settings: {
         email_enabled: window.django.email_enabled,
         registration_enabled: window.django.registration_enabled,
-        config_file_extension: window.django.config_file_extension,
-        config_file_extension_choices: []
+        client_config_file_extension: window.django.client_config_file_extension,
+        server_config_file_extension: window.django.server_config_file_extension,
+        client_config_file_extension_choices: [],
+        server_config_file_extension_choices: []
     }
 };
 

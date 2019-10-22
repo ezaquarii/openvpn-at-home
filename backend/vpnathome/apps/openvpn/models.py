@@ -195,7 +195,7 @@ class Client(models.Model):
 
     @property
     def filename(self):
-        extension = Settings.instance().config_file_extension
+        extension = Settings.instance().client_config_file_extension
         return "{client}--at--{server}.{extension}".format(client=slugify(self.name),
             server=slugify(self.server.name), extension=extension)
 

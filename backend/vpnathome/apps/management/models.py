@@ -3,12 +3,16 @@ from django.db import models
 
 class Settings(models.Model):
 
-    FILE_EXTENSION_CHOICES = [('ovpn', 'OVPN'), ('conf', 'CONF')]
+    CLIENT_FILE_EXTENSION_CHOICES = [('ovpn', 'OVPN'), ('conf', 'CONF')]
+    SERVER_FILE_EXTENSION_CHOICES = [('ovpn', 'OVPN'), ('conf', 'CONF')]
 
     email_enabled = models.BooleanField(default=False)
     registration_enabled = models.BooleanField(default=True)
-    config_file_extension = models.CharField(choices=FILE_EXTENSION_CHOICES,
+    client_config_file_extension = models.CharField(choices=CLIENT_FILE_EXTENSION_CHOICES,
             default='ovpn',
+            max_length=10)
+    server_config_file_extension = models.CharField(choices=SERVER_FILE_EXTENSION_CHOICES,
+            default='conf',
             max_length=10)
 
     class Meta():

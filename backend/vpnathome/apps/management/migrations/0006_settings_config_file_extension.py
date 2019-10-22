@@ -12,7 +12,12 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='settings',
-            name='config_file_extension',
+            name='client_config_file_extension',
             field=models.CharField(choices=[('ovpn', 'OVPN'), ('conf', 'CONF')], default='ovpn', max_length=10),
+        ),
+        migrations.AddField(
+            model_name='settings',
+            name='server_config_file_extension',
+            field=models.CharField(choices=[('ovpn', 'OVPN'), ('conf', 'CONF')], default='conf', max_length=10),
         ),
     ]

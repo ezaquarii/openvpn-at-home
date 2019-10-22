@@ -11,13 +11,16 @@ class SettingsSerializer(serializers.ModelSerializer):
     email_smtp_port = serializers.SerializerMethodField()
     email_smtp_login = serializers.SerializerMethodField()
     email_smtp_password = serializers.SerializerMethodField()
-    config_file_extension_choices = serializers.SerializerMethodField()
+    client_config_file_extension_choices = serializers.SerializerMethodField()
+    server_config_file_extension_choices = serializers.SerializerMethodField()
 
     class Meta:
         model = Settings
-        fields = ('config_file_extension_choices',
+        fields = ('client_config_file_extension_choices',
+                  'server_config_file_extension_choices',
                   'email_enabled',
-                  'config_file_extension',
+                  'client_config_file_extension',
+                  'server_config_file_extension',
                   'registration_enabled',
                   'email_from',
                   'email_smtp_server',
@@ -40,15 +43,18 @@ class SettingsSerializer(serializers.ModelSerializer):
     def get_email_smtp_password(self, instance):
         return 'hidden'
 
-    def get_config_file_extension_choices(self, instance):
-        """
-        Convert model choices to human readable format
-        """
+    def serialize_choices(self, FILE_EXTENSION_CHOICES):
         serialized_choices = []
-        for choice in Settings.FILE_EXTENSION_CHOICES:
+        for choice in FILE_EXTENSION_CHOICES:
             serialized_choices.append({'value': choice[0], 'name': choice[1]})
 
         return serialized_choices
+
+    def get_client_config_file_extension_choices(self, instance):
+        return self.serialize_choices(Settings.CLIENT_FILE_EXTENSION_CHOICES)
+
+    def get_server_config_file_extension_choices(self, instance):
+        return self.serialize_choices(Settings.SERVER_FILE_EXTENSION_CHOICES)
 
 
 class BlockListUrlUpdateSerializer(serializers.ModelSerializer):
