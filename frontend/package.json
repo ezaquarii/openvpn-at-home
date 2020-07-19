@@ -16,7 +16,7 @@
     "core-js": "^2.5.7",
     "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.19",
     "moments": "0.0.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-vue": "^0.7.0",
